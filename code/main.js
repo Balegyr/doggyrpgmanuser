@@ -82,7 +82,7 @@ scene('game', ({roomCount}) => {
   camScale(1)
   camPos(488, 280)
 
-  if (roomNum == 10) {
+  if (roomNum % 10 == 0) {
     bossRoom = true
   }
 
@@ -184,6 +184,7 @@ scene('game', ({roomCount}) => {
       sprite('boss1spawner'),
       area(),
       origin("center"),
+      "boss1spawner",
     ],
   }
     

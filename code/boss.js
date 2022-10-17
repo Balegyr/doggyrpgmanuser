@@ -39,18 +39,18 @@ function bossBattle(player, boss1, enemy1Health, enemy2Health) {
 
 function phase1Boss(player, boss1, enemy1Health, enemy2Health) {
   
-  let attack = randi(0, 5)
+  let attack = 0//randi(0, 5)
   
   switch(attack) {
     case 0: 
       boss1.frame = 1
       wait(1, () => {
-        let randomspawn = randi(0, 36)
-        let randomspawner = get("boss1spawner")[randomspawn]
+        let randomx = rand(32, 1248)
+        let randomy = rand(32, 768)
 
         add([
           sprite('enemy2'),
-          pos(randomspawner.pos),
+          pos(randomx, randomy),
           area(),
           health(enemy2Health),
           origin("center"),
@@ -59,6 +59,32 @@ function phase1Boss(player, boss1, enemy1Health, enemy2Health) {
           'enemy2',
           scale(1),
         ])
+
+        add([
+          sprite('enemy2'),
+          pos(randomx, randomy),
+          area(),
+          health(enemy2Health),
+          origin("center"),
+          solid(),
+          'enemy',
+          'enemy2',
+          scale(1),
+        ])
+
+        add([
+          sprite('enemy2'),
+          pos(randomx, randomy),
+          area(),
+          health(enemy2Health),
+          origin("center"),
+          solid(),
+          'enemy',
+          'enemy2',
+          scale(1),
+        ])
+
+        
   
         boss1.frame = 0
       })

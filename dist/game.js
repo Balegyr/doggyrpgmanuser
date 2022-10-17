@@ -3636,31 +3636,31 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   var roomsboss = [
     [
       "=========================================",
-      "=!#                                   #!=",
       "=##                                   ##=",
-      "=!                                     !=",
+      "=#                                     #=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!              #   b   #              !=",
+      "= !             #   b   #             ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                   $                   =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                                       =",
-      "=!                                     !=",
+      "= !                                   ! =",
       "=                   P                   =",
-      "=!                                     !=",
+      "= !                                   ! =",
+      "=#                                     #=",
       "=##                                   ##=",
-      "=!#! ! ! ! !                 ! ! ! ! !#!=",
       "==============-------------==============",
       "             =             =             ",
       "             =+++++++++++++=             ",
@@ -3720,16 +3720,38 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   }
   __name(bossBattle, "bossBattle");
   function phase1Boss(player, boss1, enemy1Health2, enemy2Health2) {
-    let attack = randi(0, 5);
+    let attack = 0;
     switch (attack) {
       case 0:
         boss1.frame = 1;
         wait(1, () => {
-          let randomspawn = randi(0, 36);
-          let randomspawner = get("boss1spawner")[randomspawn];
+          let randomx = rand(32, 1248);
+          let randomy = rand(32, 768);
           add([
             sprite("enemy2"),
-            pos(randomspawner.pos),
+            pos(randomx, randomy),
+            area(),
+            health(enemy2Health2),
+            origin("center"),
+            solid(),
+            "enemy",
+            "enemy2",
+            scale(1)
+          ]);
+          add([
+            sprite("enemy2"),
+            pos(randomx, randomy),
+            area(),
+            health(enemy2Health2),
+            origin("center"),
+            solid(),
+            "enemy",
+            "enemy2",
+            scale(1)
+          ]);
+          add([
+            sprite("enemy2"),
+            pos(randomx, randomy),
             area(),
             health(enemy2Health2),
             origin("center"),
@@ -4203,7 +4225,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     ], "game");
     camScale(1);
     camPos(488, 280);
-    if (roomNum == 10) {
+    if (roomNum % 10 == 0) {
       bossRoom = true;
     }
     if (bossRoom != true) {
@@ -4288,7 +4310,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       "!": () => [
         sprite("boss1spawner"),
         area(),
-        origin("center")
+        origin("center"),
+        "boss1spawner"
       ]
     };
     loadUI(killCount, playerHealth, playerSpeed, bulletShootDelay, bulletDmg, bulletSpeed, playerScale, bulletScale, levelNum, roomNum);
