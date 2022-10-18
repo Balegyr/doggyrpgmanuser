@@ -225,6 +225,10 @@ scene('game', ({roomCount}) => {
     }
   })
 
+  onUpdate("wall", (b) => {
+    b.solid = b.pos.dist(player.pos) <= 32
+})
+
   onUpdate("player", (player) => {
     if (bossRoom == true && cutscene == false && bossSpawned == false) {
       every("detect", (detector) => {
@@ -464,6 +468,9 @@ scene('game', ({roomCount}) => {
       if (bullet.isTouching(web)) {
         destroy(web)
       }
+      web.on("death", () => {
+        console.log("grr")
+      })    
     })
   })
 

@@ -5,7 +5,7 @@ function addBoss(bossSpawn) {
     sprite('boss1'),
     pos(bossSpawn),
     area(),
-    scale(4),
+    scale(1),
     solid(),
     origin("center"),
     health(300),

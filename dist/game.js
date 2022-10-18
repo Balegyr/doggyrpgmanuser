@@ -2917,8 +2917,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     [
       "===============================",
       "=                             =",
-      "=                             =",
-      "=    X                        =",
+      "=                      X      =",
+      "=    X           X            =",
       "=                             =",
       "=                        X    =",
       "=         0         0         =",
@@ -3636,31 +3636,31 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   var roomsboss = [
     [
       "=========================================",
-      "=##                                   ##=",
-      "=#                                     #=",
-      "= !                                   ! =",
       "=                                       =",
-      "= !                                   ! =",
+      "= ##                                 ## =",
+      "= #                                   # =",
       "=                                       =",
-      "= !             #   b   #             ! =",
       "=                                       =",
-      "= !                                   ! =",
       "=                                       =",
-      "= !                                   ! =",
+      "=               #   b   #               =",
+      "=                                       =",
+      "=                                       =",
+      "=                                       =",
+      "=                                       =",
       "=                   $                   =",
-      "= !                                   ! =",
       "=                                       =",
-      "= !                                   ! =",
       "=                                       =",
-      "= !                                   ! =",
       "=                                       =",
-      "= !                                   ! =",
       "=                                       =",
-      "= !                                   ! =",
+      "=                                       =",
+      "=                                       =",
+      "=                                       =",
+      "=                                       =",
+      "=                                       =",
       "=                   P                   =",
-      "= !                                   ! =",
-      "=#                                     #=",
-      "=##                                   ##=",
+      "= #                                   # =",
+      "= ##                                 ## =",
+      "=                                       =",
       "==============-------------==============",
       "             =             =             ",
       "             =+++++++++++++=             ",
@@ -3690,7 +3690,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       sprite("boss1"),
       pos(bossSpawn),
       area(),
-      scale(4),
+      scale(1),
       solid(),
       origin("center"),
       health(300),
@@ -4346,6 +4346,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         }
       }
     });
+    onUpdate("wall", (b2) => {
+      b2.solid = b2.pos.dist(player.pos) <= 32;
+    });
     onUpdate("player", (player2) => {
       if (bossRoom == true && cutscene == false && bossSpawned == false) {
         every("detect", (detector) => {
@@ -4557,6 +4560,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         if (bullet.isTouching(web)) {
           destroy(web);
         }
+        web.on("death", () => {
+          console.log("grr");
+        });
       });
     });
     onUpdate("rock", (rock) => {
